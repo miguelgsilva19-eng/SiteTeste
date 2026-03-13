@@ -12,3 +12,21 @@ const conexao = mysql.createConnection({
     password: '',
     database: 'escola4'
 });
+app.post("/salvar", (req, res) => {
+     let nome = req.body.none;
+     let idade = req.body.idade;
+
+     let sql = "INSERT INTO ALUNOS  (nome,idade) VALUES (?,?);"
+
+     conexao.query(sql,[nome,idade],(erro,resultado) =>{
+        if(errro){
+            console.log(erro);
+        }else{
+        res.send("Dados salvos com sucesso!");
+        }
+     });
+});
+
+app.listen(3000),(=> {
+    console.log("Servidor rodando na porta 3000");
+});
